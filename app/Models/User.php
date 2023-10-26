@@ -48,3 +48,4 @@ class User extends Authenticatable
         return $this->where('username', $username)->first();
     }
 }
+
