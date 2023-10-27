@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Http\Requests\LoginRequest;
+use Exception;
 
 class UserController extends Controller
 {
@@ -147,7 +149,7 @@ class UserController extends Controller
         $input = $request->all();
 
         $credentials = [
-            "email" => $input["email"],
+            "username" => $input["username"],
             "password" => $input["password"]
         ];
 
@@ -159,6 +161,7 @@ class UserController extends Controller
             return response()->json([
                 "status" => true,
                 "token" => $token,
+                "usuario" => $usuario,
                 
             ], 200);
 

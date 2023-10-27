@@ -32,5 +32,6 @@ Route::resources([
     'gasCarbonico' => GasCarbonicoEmitidoController::class,
     'historico' => HistoricoController::class,
     
+    
 ]);
 
