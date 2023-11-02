@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('combustivel', function (Blueprint $table) {
+        Schema::create('historicos', function (Blueprint $table) {
             $table->id();
-            $table->string('descricao');
+            $table->foreignId('id_gascarbonicos')->constrained('gascarbonico_emitidos');
+            $table->string('resultado');
         });
     }
 
@@ -22,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('combustivel');
+        Schema::dropIfExists('historicos');
     }
 };

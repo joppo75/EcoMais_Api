@@ -28,10 +28,10 @@ use Illuminate\Support\Facades\Route;
 Route::post("login", [UserController::class, 'login']);
 
 Route::resources([
-    'combustivel' => CombustivelController::class,
+    'combustivels' => CombustivelController::class,
     'users' => UserController::class,
-    'gasCarbonico' => GasCarbonicoEmitidoController::class,
-    'historico' => HistoricoController::class,
+    'gasCarbonicos' => GasCarbonicoEmitidoController::class,
+    'historicos' => HistoricoController::class,
     'informativos' => InformativoController::class,
 ]);
 

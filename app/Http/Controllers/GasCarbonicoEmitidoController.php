@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\GasCarbonicoEmitido;
 use App\Http\Requests\StoreGasCarbonicoEmitidoRequest;
 use App\Http\Requests\UpdateGasCarbonicoEmitidoRequest;
+use Exception;
 
 class GasCarbonicoEmitidoController extends Controller
 {
@@ -13,7 +14,24 @@ class GasCarbonicoEmitidoController extends Controller
      */
     public function index()
     {
-        //
+        try {
+            
+            $obj = new GasCarbonicoEmitido();
+            $gas = $obj->all();
+
+            return [
+                'status' => 1,
+                'data' => $gas
+            ];
+
+        } catch (Exception $e){
+
+            return [
+                "status" => 0,
+                "error" => $e->getMessage(),
+            ];
+
+        }
     }
 
     /**
@@ -29,7 +47,24 @@ class GasCarbonicoEmitidoController extends Controller
      */
     public function store(StoreGasCarbonicoEmitidoRequest $request)
     {
-        //
+        try {
+            
+            $obj = new GasCarbonicoEmitido();
+            $gas = $obj->create($request->all());
+
+            return [
+                'status' => 1,
+                'data' => $gas
+            ];
+
+        } catch (Exception $e){
+
+            return [
+                "status" => 0,
+                "error" => $e->getMessage(),
+            ];
+
+        }
     }
 
     /**
@@ -37,7 +72,21 @@ class GasCarbonicoEmitidoController extends Controller
      */
     public function show(GasCarbonicoEmitido $gasCarbonicoEmitido)
     {
-        //
+        try {
+
+            return [
+                "status" => 1,
+                "data" => $gasCarbonicoEmitido
+            ];
+
+        } catch (Exception $e){
+
+            return [
+                "status" => 0,
+                "error" => $e->getMessage(),
+            ];
+
+        }
     }
 
     /**
@@ -53,7 +102,23 @@ class GasCarbonicoEmitidoController extends Controller
      */
     public function update(UpdateGasCarbonicoEmitidoRequest $request, GasCarbonicoEmitido $gasCarbonicoEmitido)
     {
-        //
+        try {
+
+            $gasCarbonicoEmitido->update($request->all());
+
+            return [
+                "status" => 1,
+                "data" => $gasCarbonicoEmitido
+            ];
+
+        } catch (Exception $e){
+
+            return [
+                "status" => 0,
+                "error" => $e->getMessage()
+            ];
+            
+        }
     }
 
     /**
@@ -61,6 +126,22 @@ class GasCarbonicoEmitidoController extends Controller
      */
     public function destroy(GasCarbonicoEmitido $gasCarbonicoEmitido)
     {
-        //
+        try {
+
+            $gasCarbonicoEmitido->delete();
+
+            return [
+                "status" => 1,
+                "data" => $gasCarbonicoEmitido
+            ];
+
+        } catch (Exception $e){
+
+            return [
+                "status" => 1,
+                "error" => $e->getMessage()
+            ];
+
+        }
     }
 }

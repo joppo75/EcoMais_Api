@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('historico', function (Blueprint $table) {
+        Schema::create('gascarbonico_emitidos', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_gascarbonico')->constrained('gascarbonico_emitido');
-            $table->double('valor');
-            $table->double('resultado');
+            $table->foreignId('id_combustivels')->constrained('combustivels');
+            $table->double('qtd_listros');
+            $table->double('qtd_km');
+            $table->string('resultado');
         });
     }
 
@@ -24,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('historico');
+        Schema::dropIfExists('gascarbonico_emitidos');
     }
 };

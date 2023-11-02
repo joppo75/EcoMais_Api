@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Combustivel;
 use App\Http\Requests\StoreCombustivelRequest;
 use App\Http\Requests\UpdateCombustivelRequest;
+use Exception;
 
 class CombustivelController extends Controller
 {
@@ -13,7 +14,24 @@ class CombustivelController extends Controller
      */
     public function index()
     {
-        //
+        try {
+            
+            $obj = new Combustivel();
+            $comb = $obj->all();
+
+            return [
+                'status' => 1,
+                'data' => $comb
+            ];
+
+        } catch (Exception $e){
+
+            return [
+                "status" => 0,
+                "error" => $e->getMessage(),
+            ];
+
+        }
     }
 
     /**
@@ -29,7 +47,24 @@ class CombustivelController extends Controller
      */
     public function store(StoreCombustivelRequest $request)
     {
-        //
+        try {
+            
+            $obj = new Combustivel();
+            $comb = $obj->create($request->all());
+
+            return [
+                'status' => 1,
+                'data' => $comb
+            ];
+
+        } catch (Exception $e){
+
+            return [
+                "status" => 0,
+                "error" => $e->getMessage(),
+            ];
+
+        }
     }
 
     /**
@@ -37,7 +72,21 @@ class CombustivelController extends Controller
      */
     public function show(Combustivel $combustivel)
     {
-        //
+        try {
+
+            return [
+                "status" => 1,
+                "data" => $combustivel
+            ];
+
+        } catch (Exception $e){
+
+            return [
+                "status" => 0,
+                "error" => $e->getMessage(),
+            ];
+
+        }
     }
 
     /**
@@ -53,7 +102,23 @@ class CombustivelController extends Controller
      */
     public function update(UpdateCombustivelRequest $request, Combustivel $combustivel)
     {
-        //
+        try {
+
+            $combustivel->update($request->all());
+
+            return [
+                "status" => 1,
+                "data" => $combustivel
+            ];
+
+        } catch (Exception $e){
+
+            return [
+                "status" => 0,
+                "error" => $e->getMessage()
+            ];
+            
+        }
     }
 
     /**
@@ -61,6 +126,22 @@ class CombustivelController extends Controller
      */
     public function destroy(Combustivel $combustivel)
     {
-        //
+        try {
+
+            $combustivel->delete();
+
+            return [
+                "status" => 1,
+                "data" => $combustivel
+            ];
+
+        } catch (Exception $e){
+
+            return [
+                "status" => 1,
+                "error" => $e->getMessage()
+            ];
+
+        }
     }
 }

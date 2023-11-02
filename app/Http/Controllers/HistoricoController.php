@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Historico;
 use App\Http\Requests\StoreHistoricoRequest;
 use App\Http\Requests\UpdateHistoricoRequest;
+use Exception;
 
 class HistoricoController extends Controller
 {
@@ -13,7 +14,24 @@ class HistoricoController extends Controller
      */
     public function index()
     {
-        //
+        try {
+            
+            $obj = new Historico();
+            $his = $obj->all();
+
+            return [
+                'status' => 1,
+                'data' => $his
+            ];
+
+        } catch (Exception $e){
+
+            return [
+                "status" => 0,
+                "error" => $e->getMessage(),
+            ];
+
+        }
     }
 
     /**
@@ -29,7 +47,24 @@ class HistoricoController extends Controller
      */
     public function store(StoreHistoricoRequest $request)
     {
-        //
+        try {
+            
+            $obj = new Historico();
+            $his = $obj->create($request->all());
+
+            return [
+                'status' => 1,
+                'data' => $his
+            ];
+
+        } catch (Exception $e){
+
+            return [
+                "status" => 0,
+                "error" => $e->getMessage(),
+            ];
+
+        }
     }
 
     /**
@@ -37,7 +72,21 @@ class HistoricoController extends Controller
      */
     public function show(Historico $historico)
     {
-        //
+        try {
+
+            return [
+                "status" => 1,
+                "data" => $historico
+            ];
+
+        } catch (Exception $e){
+
+            return [
+                "status" => 0,
+                "error" => $e->getMessage(),
+            ];
+
+        }
     }
 
     /**
@@ -53,7 +102,23 @@ class HistoricoController extends Controller
      */
     public function update(UpdateHistoricoRequest $request, Historico $historico)
     {
-        //
+        try {
+
+            $historico->update($request->all());
+
+            return [
+                "status" => 1,
+                "data" => $historico
+            ];
+
+        } catch (Exception $e){
+
+            return [
+                "status" => 0,
+                "error" => $e->getMessage()
+            ];
+            
+        }
     }
 
     /**
@@ -61,6 +126,22 @@ class HistoricoController extends Controller
      */
     public function destroy(Historico $historico)
     {
-        //
+        try {
+
+            $historico->delete();
+
+            return [
+                "status" => 1,
+                "data" => $historico
+            ];
+
+        } catch (Exception $e){
+
+            return [
+                "status" => 1,
+                "error" => $e->getMessage()
+            ];
+
+        }
     }
 }
