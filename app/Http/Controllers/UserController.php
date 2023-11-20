@@ -103,6 +103,11 @@ class UserController extends Controller
     public function update(UpdateUserRequest $request, User $user)
     {
         try {
+
+           $request->request->remove('usermame');
+           $request->request->remove('password');
+            
+            
             $user->update($request->all());
 
             return [
@@ -144,6 +149,31 @@ class UserController extends Controller
         }
     }
 
+    public function verificarUsuario(LoginRequest $request)
+    {
+        $username = $request->input('username');
+        
+        // Chame a função de verificação
+        $resposta = $this->verificarUsuarioNoModel($username);
+        
+        return $resposta;
+    }
+
+    // ...
+
+    private function verificarUsuarioNoModel($username)
+    {
+        $usuario = User::where('username', $username)->first();
+
+        if ($usuario) {
+            // O usuário está cadastrado
+            return response()->json(['message' => 'Usuário cadastrado'], 200);
+        } else {
+            // O usuário não está cadastrado
+            return response()->json(['error' => 'Usuário não encontrado'], 404);
+        }
+    }
+
     public function login(LoginRequest  $request){
 
         $input = $request->all();
@@ -175,6 +205,7 @@ class UserController extends Controller
         };
     }
 
+
     public function logout()
     {
         if (auth()->check()) {
@@ -192,4 +223,5 @@ class UserController extends Controller
             ], 500);
         }
     }
+
 }

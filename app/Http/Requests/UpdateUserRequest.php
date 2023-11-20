@@ -25,4 +25,11 @@ class UpdateUserRequest extends FormRequest
             //
         ];
     }
+
+    public function messages(): array {
+
+        return [
+            //
+        ];
+    }
 }

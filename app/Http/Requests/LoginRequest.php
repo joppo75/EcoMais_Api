@@ -22,7 +22,16 @@ class LoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'username' => 'required',
+            'password' => 'required',
+        ];
+    }
+
+    public function messages(): array {
+
+        return [
+            "username.required" => "Informe o Username.",
+            "password.required" => "Informe a senha.",
         ];
     }
 }

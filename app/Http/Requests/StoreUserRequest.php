@@ -22,7 +22,20 @@ class StoreUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "username"=>"required|unique:users,username"
+            "name"=>"required",
+            "email"=>"required",
+            "username"=>"required|unique:users,username",
+            'password' => 'required',
+        ];
+    }
+
+    public function messages(): array {
+
+        return [
+            "name.required" => "Informe o Nome.",
+            "email.required" => "Informe o E-mail.",
+            "username.required" => "Informe o Username.",
+            "password.required" => "Informe a senha.",
         ];
     }
 }

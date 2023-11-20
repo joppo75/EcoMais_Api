@@ -17,7 +17,7 @@ class GasCarbonicoEmitidoController extends Controller
         try {
             
             $obj = new GasCarbonicoEmitido();
-            $gas = $obj->all();
+            $gas = $obj->orderByDesc('id')->take(5)->get();
 
             return [
                 'status' => 1,

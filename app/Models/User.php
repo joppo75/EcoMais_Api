@@ -47,5 +47,17 @@ class User extends Authenticatable
     public function findForPassport(){
         return $this->where('username', $username)->first();
     }
+
+    public function verificarUsuario($username) {
+        $usuario = User::where('username', $username)->first();
+    
+        if ($usuario) {
+            // O usuário está cadastrado
+            return response()->json(['message' => 'Usuário cadastrado'], 200);
+        } else {
+            // O usuário não está cadastrado
+            return response()->json(['error' => 'Usuário não encontrado'], 404);
+        }
+    }
 }
 

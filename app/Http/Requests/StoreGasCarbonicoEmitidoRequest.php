@@ -22,7 +22,18 @@ class StoreGasCarbonicoEmitidoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'id_combustivels' => 'required',
+            'qtd_listros' => 'required',
+            'qtd_km' => 'required',
+        ];
+    }
+
+    public function messages(): array {
+
+        return [
+            "id_combustivels.required" => "Informe o Combustivel.",
+            "qtd_listros.required" => "Informe a quantidade de Litros.",
+            "qtd_km.required" => "Informe o KM.",
         ];
     }
 }
